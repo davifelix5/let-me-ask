@@ -1,11 +1,17 @@
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import { CreateRoom } from "./pages/CreateRoom";
 import { Home } from "./pages/Home";
 
 import './global.scss';
-import { CreateRoom } from "./pages/CreateRoom";
+
 
 function App() {
   return (
-    <CreateRoom />
+    <BrowserRouter>
+      <Route path="/" component={Home} exact />
+      <Route path="/rooms/create" component={CreateRoom} />
+    </BrowserRouter>
   );
 }
 
