@@ -5,12 +5,16 @@ import { Home } from "./pages/Home";
 
 import './global.scss';
 
+import { AuthContextProvider } from './contexts/AuthContext';
 
 function App() {
+
   return (
     <BrowserRouter>
-      <Route path="/" component={Home} exact />
-      <Route path="/rooms/create" component={CreateRoom} />
+    <AuthContextProvider>
+        <Route path="/" component={Home} exact />
+        <Route path="/rooms/create" component={CreateRoom} />
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }

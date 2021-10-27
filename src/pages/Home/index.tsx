@@ -1,7 +1,5 @@
 import { useHistory } from 'react-router-dom';
 
-import { auth, firebase } from '../../services/firebase';
-
 import illustrationImg from '../../assets/img/illustration.svg';
 import logoImg from '../../assets/img/logo.svg';
 import googleIconImg from '../../assets/img/google-icon.svg';
@@ -9,18 +7,20 @@ import googleIconImg from '../../assets/img/google-icon.svg';
 import './styles.scss';
 
 import { MainButton } from '../../components/MainButton';
+import { useAuth } from '../../hooks/useAuth';
+
 
 export function Home() {
+  const {
+    user,
+    signInWithGoogle
+  } = useAuth();
   const history = useHistory();
 
-  function handleCreateRoom() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider)
-      .then(res => {
-        console.log(res);
-      })
-
+  async function handleCreateRoom() {
+    if (!user) {
+      await signInWithGoogle()
+    }
     history.push('rooms/create');
   }
 
