@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router-dom';
 
+import { auth, firebase } from '../../services/firebase';
+
 import illustrationImg from '../../assets/img/illustration.svg';
 import logoImg from '../../assets/img/logo.svg';
 import googleIconImg from '../../assets/img/google-icon.svg';
@@ -11,7 +13,14 @@ import { MainButton } from '../../components/MainButton';
 export function Home() {
   const history = useHistory();
 
-  function navigateToNewRoom() {
+  function handleCreateRoom() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider)
+      .then(res => {
+        console.log(res);
+      })
+
     history.push('rooms/create');
   }
 
@@ -25,7 +34,7 @@ export function Home() {
       <main>
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
-          <button className="create-room">
+          <button className="create-room" onClick={handleCreateRoom}>
             <img src={googleIconImg} alt="Google icon" />
             Cria sua sala com o Google 
           </button>
@@ -35,7 +44,7 @@ export function Home() {
               type="text" 
               placeholder="Digite o código da sala"
             />
-            <MainButton type="submit" onClick={navigateToNewRoom}>
+            <MainButton type="submit">
               Entrar em uma sala
             </MainButton>
           </form>
