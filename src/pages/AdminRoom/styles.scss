@@ -13,6 +13,15 @@
       > img {
         max-height: 45px;
       }
+
+      > div {
+        display: flex;
+        gap: 16px;
+        
+        button {
+          height: 40px;
+        }
+      }
     }
   }
 
@@ -100,33 +109,6 @@
       list-style: none;
       background: none;
       box-shadow: none;
-
-      button {
-        border: 0;
-        background: transparent;
-        cursor: pointer;
-        
-        &.like-button {
-          display: flex;
-          gap: 8px;
-          align-items: flex-end;
-          color: #737380;
-        }
-
-        &.liked {
-          color: #835afd;
-        
-          svg path {
-            stroke: #835afd;
-          }
-        }
-
-        transition: filter 0.5s;
-
-        &:hover {
-          filter: brightness(0.7);
-        }
-      }
     }
   }
 }

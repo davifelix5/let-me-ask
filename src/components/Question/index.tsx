@@ -1,4 +1,4 @@
-import { listeners } from 'cluster';
+import { ReactNode } from 'react';
 import './styles.scss';
 
 type QuestionProps = {
@@ -6,12 +6,14 @@ type QuestionProps = {
   author: {
     name: string;
     avatar: string;
-  }
+  };
+  children?: ReactNode;
 }
 
 export function Question({
   content,
   author,
+  children
 }: QuestionProps) {
   return (
     <li className="question">
@@ -21,7 +23,7 @@ export function Question({
           <img src={author.avatar} alt={author.name} />
           <span>{author.name}</span>
         </div>
-        <div></div>
+        <div>{children}</div>
       </footer>
     </li>
   )
