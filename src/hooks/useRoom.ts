@@ -38,7 +38,7 @@ export function useRoom(roomId: string) {
 
   useEffect(() => {
     const roomRef = database.ref(`/rooms/${roomId}`);
-    roomRef.on('value', room => {
+    roomRef.orderByChild('likes').on('value', room => {
       const databaseRoom = room.val();
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions;
      
@@ -52,7 +52,9 @@ export function useRoom(roomId: string) {
             })?.[0],
             ...question,
           }
-        });
+        })
+        .sort((question1, question2) => !question1.isHighlighted && question2.isHighlighted ? 1 : 0)
+        .sort((question1, question2) => question2.likeCount - question1.likeCount);
       
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
