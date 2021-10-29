@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import logo from '../../assets/img/logo.svg';
 import deleteImage from '../../assets/img/delete.svg';
@@ -60,7 +60,9 @@ export function AdminRoom() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logo} alt="Letmeask" />
+          <Link to="/">
+            <img src={logo} alt="Letmeask" />
+          </Link>
           <div>
             <RoomCode code={roomId} />
             <MainButton onClick={handleEndRoom} isOutlined>Encessar sala</MainButton>
