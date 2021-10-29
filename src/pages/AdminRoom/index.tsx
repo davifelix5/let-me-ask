@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router-dom';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import logo from '../../assets/img/logo.svg';
 import deleteImage from '../../assets/img/delete.svg';
 import answerImage from '../../assets/img/answer.svg';
 import checkImage from '../../assets/img/check.svg';
@@ -9,6 +8,7 @@ import checkImage from '../../assets/img/check.svg';
 import { MainButton } from '../../components/MainButton';
 import { Question } from '../../components/Question';
 import { RoomCode } from '../../components/RoomCode';
+import { Header } from '../../components/Header';
 
 import { useRoom } from '../../hooks/useRoom';
 
@@ -58,17 +58,10 @@ export function AdminRoom() {
 
   return (
     <div id="page-room">
-      <header>
-        <div className="content">
-          <Link to="/">
-            <img src={logo} alt="Letmeask" />
-          </Link>
-          <div>
-            <RoomCode code={roomId} />
-            <MainButton onClick={handleEndRoom} isOutlined>Encessar sala</MainButton>
-          </div>
-        </div>
-      </header>
+      <Header>
+        <RoomCode code={roomId} />
+        <MainButton onClick={handleEndRoom} isOutlined>Encessar sala</MainButton>
+      </Header>
       <main>
         <div className="room-title">
           <h1>Sala '{title}'</h1>
