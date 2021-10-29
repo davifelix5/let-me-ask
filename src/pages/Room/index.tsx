@@ -21,12 +21,20 @@ export function Room() {
 
   const { id: roomId } = useParams<RoomRootParams>();
 
-  const { user } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
 
   const { questions, title } = useRoom(roomId);
 
   const [newQuestion, setNewQuestion] = useState('');
   const [sending, setSending] = useState(false);
+
+  async function handleLogin() {
+    try {
+      await signInWithGoogle();
+    } catch {
+      alert('Houve um erro no seu loign. Tente novamente!')
+    }
+  }
 
   async function handleNewQuestion(e: FormEvent) {
     e.preventDefault();
@@ -38,7 +46,8 @@ export function Room() {
     }
 
     if (!user) {
-      throw new Error('Você deve estar logado para criar uma pergunta!')
+      alert('Você deve estar logado para criar uma pergunta!');
+      return;
     }
 
     const question = {
@@ -99,7 +108,7 @@ export function Room() {
                 <img src={user.avatar} alt={user.name} />
                 <span>{user.name}</span>
               </div>
-            ) : <span>Para enviar uma perguntar, <button>faça seu login</button>.</span>}
+            ) : <span>Para enviar uma perguntar, <button onClick={handleLogin}>faça seu login</button>.</span>}
             <MainButton type="submit" disabled={sending || !newQuestion}>
               Enviar uma pergunta
             </MainButton>
