@@ -53,8 +53,13 @@ export function useRoom(roomId: string) {
             ...question,
           }
         })
-        .sort((question1, question2) => !question1.isHighlighted && question2.isHighlighted ? 1 : 0)
-        .sort((question1, question2) => question2.likeCount - question1.likeCount);
+        .sort((question1, question2) => question2.likeCount - question1.likeCount)
+        .sort((question1, question2) => {
+          if (!question1.isAnswered) {
+            return !question1.isHighlighted && question2.isHighlighted ? 1 : 0
+          }
+          return 1;
+        });
       
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
