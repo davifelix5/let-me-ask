@@ -48,16 +48,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-
-    try {
-      const res = await auth.signInWithPopup(provider)
-      
-      if (res.user) {
-        identifyUser(res.user)
-      }
-
-    } catch (err) {
-      alert('Erro ao fazer loing')
+    const res = await auth.signInWithPopup(provider)
+    
+    if (res.user) {
+      identifyUser(res.user)
     }
   }
 

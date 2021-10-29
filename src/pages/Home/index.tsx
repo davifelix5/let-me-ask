@@ -22,10 +22,14 @@ export function Home() {
   const [roomCode, setRoomCode] = useState('');
 
   async function handleCreateRoom() {
-    if (!user) {
-      await signInWithGoogle()
+    try {
+      if (!user) {
+        await signInWithGoogle()
+      }
+      history.push('rooms/create');
+    } catch {
+      alert('Erro ao fazer login!')
     }
-    history.push('rooms/create');
   }
 
   async function handleJoinRoom(e: FormEvent) {
