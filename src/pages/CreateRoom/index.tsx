@@ -35,7 +35,7 @@ export function CreateRoom() {
         authorId: user?.id,
       });
       setNewRoom('');
-      history.push(`/rooms/${firebaseRoom.key}`);
+      history.push(`/admin/rooms/${firebaseRoom.key}`);
     } catch(err) {
       alert('Houve um erro durante a criação da sala!');
     }

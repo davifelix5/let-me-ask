@@ -26,7 +26,7 @@ export function Home() {
       if (!user) {
         await signInWithGoogle()
       }
-      history.push('rooms/create');
+      history.push('/rooms/create');
     } catch {
       alert('Erro ao fazer login!')
     }
