@@ -10,7 +10,6 @@ export function MainButton({ isOutlined = false, ...props }: MainButtonProps ) {
   return (
     <button 
       className={`button ${isOutlined ? 'outlined' : ''}`} 
-      id="main-button" 
       {...props}
     >
 
