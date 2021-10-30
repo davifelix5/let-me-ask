@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 import deleteImage from '../../assets/img/delete.svg';
 import answerImage from '../../assets/img/answer.svg';
