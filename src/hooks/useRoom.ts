@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 import { database } from '../services/firebase';
 
@@ -30,9 +31,14 @@ type Question = {
   likeId: string | undefined;
 }
 
-export function useRoom(roomId: string) {
+type RoomRootParams = {
+  id: string;
+}
+
+export function useRoom() {
   
   const { user } = useAuth();
+  const { id: roomId } = useParams<RoomRootParams>();
   const [questions, setQuestions] = useState<Question[]>([])
   const [title, setTitle] = useState('');
 
@@ -72,6 +78,7 @@ export function useRoom(roomId: string) {
 
   return {
     title,
-    questions
+    questions,
+    roomId
   }
 }

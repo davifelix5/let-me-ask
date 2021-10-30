@@ -16,16 +16,11 @@ import { database } from '../../services/firebase';
 
 import './styles.scss';
 
-type RoomRootParams = {
-  id: string;
-}
-
 export function AdminRoom() {
 
   const history = useHistory();
-  const { id: roomId } = useParams<RoomRootParams>();
-  
-  const { questions, title } = useRoom(roomId);
+
+  const { questions, title, roomId } = useRoom();
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({

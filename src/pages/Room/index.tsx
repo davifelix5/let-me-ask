@@ -13,17 +13,11 @@ import { database } from '../../services/firebase';
 
 import './styles.scss';
 
-type RoomRootParams = {
-  id: string;
-}
-
 export function Room() {
-
-  const { id: roomId } = useParams<RoomRootParams>();
 
   const { user, signInWithGoogle } = useAuth();
 
-  const { questions, title } = useRoom(roomId);
+  const { questions, title, roomId } = useRoom();
 
   const [newQuestion, setNewQuestion] = useState('');
   const [sending, setSending] = useState(false);
