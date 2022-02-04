@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import deleteImage from '../../assets/img/delete.svg';
@@ -10,8 +11,9 @@ import { RoomCode } from '../../components/RoomCode';
 import { Header } from '../../components/Header';
 
 import { useRoom } from '../../hooks/useRoom';
+import { useAuth } from '../../hooks/useAuth';
 
-import { database } from '../../services/firebase';
+import { database, auth } from '../../services/firebase';
 
 import './styles.scss';
 
@@ -20,6 +22,20 @@ export function AdminRoom() {
   const history = useHistory();
 
   const { questions, title, roomId } = useRoom();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      const roomSnapshot = await database.ref(`rooms/${roomId}`).get();
+      const { authorId } = roomSnapshot.val();
+      auth.onAuthStateChanged(user => {
+        if (authorId !== user?.uid) {
+          history.push('/')
+        }
+      });
+    }
+    verifyUser()
+  }, [roomId, history, user]);
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
