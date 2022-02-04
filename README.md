@@ -14,7 +14,7 @@
 ## Tecnologias
   - [ReactJS](https://pt-br.reactjs.org/)
   - [TypeScript](https://www.typescriptlang.org/)
-  - [Sass
+  - [Sass](https://sass-lang.com/)
   - [Firebase](https://firebase.google.com/?hl=pt-br) para banco de dados (Real Time Database), autenticação com o Google e deploy.
 
   
